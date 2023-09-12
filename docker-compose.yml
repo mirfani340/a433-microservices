@@ -4,7 +4,7 @@ services:
 # Melakukan init pada setiap service yang akan di jalankan
   item-db:
   # Init images yang akan digunakan
-    image: 'mongo:latest'
+    image: 'mongo:3'
     # Memasang custom name pada container
     container_name: item-db
     # Init custom network supaya item-db dan item-app dalam satu jaringan
