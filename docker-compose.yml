@@ -21,21 +21,18 @@ services:
 
   item-app:
     container_name: item-app
-    # Menggunakan build dari Dockerfile-item-app
-    build:
-      context: .        # Build context di current directory
-      dockerfile: Dockerfile  # Menjalankan build dari Dockerfile
+    image: ghcr.io/mirfani340/a433-microservices:v1
     networks:
       - dicoding-devops
     ports:
       - '80:8080'
     volumes:
       - 'app-db:/data/db'
-    # Setting ENV untuk service item-app
+    # Setting ENV untuk item-app service
     environment:
       NODE_ENV: production
       DB_HOST: item-db
-    # Restart policy, digunakan jika service mati akan auto-restart
+    # Restart policy, untuk restart otomatis
     restart: always
 # Menggunakan custom docker networks
 networks:
