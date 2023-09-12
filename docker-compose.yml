@@ -1,0 +1,45 @@
+# Versi docker-compose
+version: '3.7'
+services:
+# Melakukan init pada setiap service yang akan di jalankan
+  item-db:
+  # Init images yang akan digunakan
+    image: 'mongo:latest'
+    # Memasang custom name pada container
+    container_name: item-db
+    # Init custom network supaya item-db dan item-app dalam satu jaringan
+    networks:
+      - dicoding-devops
+    # Expose port item-db
+    ports:
+      - 27017:27017
+    # Menggunakan docker custom docker volumes
+    volumes:
+      - 'app-db:/data/db'
+    # Restart policy, digunakan jika service mati akan auto-restart
+    restart: always
+
+  item-app:
+    container_name: item-app
+    # Menggunakan build dari Dockerfile-item-app
+    build:
+      context: .        # Build context di current directory
+      dockerfile: Dockerfile  # Menjalankan build dari Dockerfile
+    networks:
+      - dicoding-devops
+    ports:
+      - '80:8080'
+    volumes:
+      - 'app-db:/data/db'
+    # Setting ENV untuk service item-app
+    environment:
+      NODE_ENV: production
+      DB_HOST: item-db
+    # Restart policy, digunakan jika service mati akan auto-restart
+    restart: always
+# Menggunakan custom docker networks
+networks:
+  dicoding-devops:
+# Menggunakan volumen app-db
+volumes:
+  app-db:
