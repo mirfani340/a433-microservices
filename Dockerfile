@@ -21,17 +21,3 @@ EXPOSE 8080
 
 # Start the server with the npm start command
 CMD ["npm", "start"]
-
-# FROM node:14-alpine
-
-# RUN apk add --no-cache python2 g++ make
-
-# WORKDIR /app
-
-# COPY . .
-
-# RUN yarn install --production
-
-# CMD ["node", "src/index.js"]
-
-# EXPOSE 3000
