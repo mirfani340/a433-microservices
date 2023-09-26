@@ -43,7 +43,7 @@ jobs:
 
       - name: Authenticate with GHCR
         run: |
-          docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin <<<${{ secrets.GITHUB_TOKEN }}
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
 
       - name: Build and push Docker image
         run: |
