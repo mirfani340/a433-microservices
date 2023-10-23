@@ -1,19 +1,19 @@
-# Use the Node.js 14 base image
+# Menggunakan Node.js 14 sebagai base image
 FROM node:14-alpine
 
 RUN apk add --no-cache python2 g++ make
 
-# Set the working directory to /app
+# Mengatur working directory ke /app
 WORKDIR /app
 
-# Copy all source code to the working directory
+# Copy semua source code ke working directory
 COPY . .
 
-# Set environment variables for production mode and database host
+# Mengatur ENV untuk production dan database host
 ENV NODE_ENV=production
 ENV DB_HOST=item-db
 
-# Install production dependencies and build the application
+# Install production dependencies dan build aplikasi
 RUN npm install --production --unsafe-perm && npm run build
 
 # Expose port 8080
